@@ -14,7 +14,7 @@ journal = {NeurIPS 2020 Workshop on Object Representations for Learning and Reas
 year = {2020},
 }
 
-@incollection{duta2020dynamic_dyreg_gnn_neurips2021,
+@incollection{duta2021dynamic_dyreg_gnn_neurips2021,
 title = {Discovering Dynamic Salient Regions with Spatio-Temporal Graph
 Neural Networks},
 author = {Duta, Iulia and Nicolicioiu, Andrei and Leordeanu, Marius},
