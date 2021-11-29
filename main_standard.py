@@ -15,7 +15,7 @@ from ops.rstg import *
 from ops.transforms import *
 from ops import dataset_config
 from ops.utils import LearnedParamChecker, AverageMeter, accuracy
-from ops.utils import save_kernels,save_mean_kernels, count_params
+from ops.utils import save_kernels, save_mean_kernels, count_params
 
 
 from ops.temporal_shift import make_temporal_pool

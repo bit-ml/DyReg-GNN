@@ -1,8 +1,6 @@
-# apt-get update
-# apt-get install -y libgl1-mesa-dev
 RAND=$((RANDOM))
 
-MODEL_DIR='/models/'$1
+MODEL_DIR='./models/'$1
 LOG_NAME=$MODEL_DIR'/log_'$RAND
 
 mkdir $MODEL_DIR
@@ -23,7 +21,7 @@ args="--name=$1 --visualisation=hsv  --weights=$RESUME_CKPT
         --test_segments 16 --gd 20 --lr_steps 20 40 --epochs 60 -j 16 
         --dropout 0.000000000000000001 --consensus_type=avg --eval-freq=1   
         --shift --shift_div=8 --shift_place=blockres  --model_dir=$MODEL_DIR  
-        --full_size_224=False  --full_res=False"
+        --full_size_224=False  --full_res=False --save_kernels=True"
 
 
 echo $args > $MODEL_DIR'/args_'$RAND
@@ -32,7 +30,7 @@ echo $args > $MODEL_DIR'/args_'$RAND
 # CUDA_VISIBLE_DEVICES="" python -u  test_models.py $args  & tee $LOG_NAME
 
 # run on GPU
-CUDA_VISIBLE_DEVICES=0 python -u -m  torch.distributed.launch --nproc_per_node=1  --master_port=6004 test_models.py $args  |& tee $LOG_NAME
+CUDA_VISIBLE_DEVICES=1 python -u -m  torch.distributed.launch --nproc_per_node=1  --master_port=6004 test_models.py $args  |& tee $LOG_NAME
 
 
 

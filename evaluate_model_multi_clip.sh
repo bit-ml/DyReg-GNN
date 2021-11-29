@@ -1,8 +1,6 @@
-# apt-get update
-# apt-get install -y libgl1-mesa-dev
 RAND=$((RANDOM))
 
-MODEL_DIR='/models/'$1
+MODEL_DIR='./models/'$1
 LOG_NAME=$MODEL_DIR'/log_'$RAND
 
 mkdir $MODEL_DIR

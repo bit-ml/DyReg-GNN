@@ -235,10 +235,12 @@ def eval_video(video_data, net, this_test_segments, modality, mode='eval'):
         
         rst, model_aux_feats = net(data_in)
         aux = model_aux_feats['interm_feats']
-
-        if args.save_kernels:
+        offsets = model_aux_feats['offsets']
+        
+        list_save_iter = [0,100,1000]
+        if args.save_kernels and i in list_save_iter: 
             folder = os.path.join(args.model_dir, args.store_name, args.root_log,'kernels')
-            save_kernels(rst, aux, folder=folder, name=f'validation_iter_{i}')
+            save_kernels(data_in, aux, folder=folder, name=f'validation_iter_{i}', predicted_offsets=offsets)
         rst = rst.reshape(batch_size, num_crop, -1).mean(1)
 
         if args.softmax:

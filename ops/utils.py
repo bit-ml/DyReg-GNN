@@ -81,6 +81,7 @@ def draw_box_gt(frame, target_boxes, colors=[1,1,1], partial=False, line_width=1
         frame[bot_h : bot_h + line_width, left_w : right_w] = colors[b]
 
     return frame  
+
 def save_grad_cam(input, grad_cams, folder, name='initial'):
 
     import cv2
@@ -179,7 +180,7 @@ def save_kernels(input, interm_feats, folder, name='initial', target_offset=None
         kernel_val = interm_feats[placement+'_kernels'].detach().cpu().numpy()
         video_input_val = input.detach().cpu().numpy()
 
-        video_input_val = np.reshape(video_input_val, [args.batch_size * args.test_crops, -1, input_ch , video_input_val.shape[2],video_input_val.shape[3]])
+        video_input_val = np.reshape(video_input_val, [args.batch_size * args.test_crops, -1, input_ch , video_input_val.shape[-2],video_input_val.shape[-1]])
         video_input_val = np.transpose(video_input_val, [0,1,3,4,2])
         if args.modality == 'gray':
             tmp_zeros = -1 * np.ones((video_input_val.shape[0], video_input_val.shape[1], video_input_val.shape[2], video_input_val.shape[3], 3))
